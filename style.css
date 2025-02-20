@@ -20,11 +20,13 @@ header {
 
 
 /* === MAIN === */
+/* ===Taschenrechner-UI === */
 .calculator {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+
     width: 450px;
     height: 600px;
     background-color: rgb(173, 173, 173);
@@ -33,6 +35,7 @@ header {
     margin: 0 auto;
 }
 
+/* === Display === */
 .display {
     width: 90%;
     height: 20%;
@@ -48,10 +51,76 @@ header {
     padding: 1rem;
 }
 
+/* === Buttons === */
 .buttons {
     width: 90%;
     height: 65%;
-    background-color: aliceblue;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttons button {
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 1.7rem;
+}
+
+/* === Lösch-Buttons === */
+.eraseButtons {
+    width: 100%;
+    height: 20%;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.eraseButtons button {
+    width: 50%;
+    height: 100%;
+}
+
+.eraseButtons .clear {
+    background-color: rgb(210, 106, 106);
+}
+
+.eraseButtons .clear:hover {
+    background-color: rgb(206, 62, 62);
+}
+
+.eraseButtons .delete {
+    background-color: rgb(99, 99, 206);
+}
+
+.eraseButtons .delete:hover {
+    background-color: rgb(52, 52, 201);
+}
+
+/* === Eingabe-Buttons === */
+.inputButtons {
+    width: 100%;
+    height: 80%;
+    margin-top: 10px;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.inputButtons button {
+    width: 23%;
+    height: 23%;
+    background-color: rgb(247, 247, 247)
+}
+
+.inputButtons button:hover {
+    background-color: rgb(141, 141, 141);
 }
 
 
