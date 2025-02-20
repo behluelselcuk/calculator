@@ -15,32 +15,32 @@
         <!-- Taschenrechner UI -->
         <div class="calculator">
             <!-- Display -->
-            <div class="display">0</div>
+            <div id="display">0</div>
             <!-- Buttons -->
-            <div class="buttons">
+            <div class="buttonsHeader">
                 <!-- Lösch-Buttons -->
                 <div class="eraseButtons">
-                    <button class="clear">Clear</button>
-                    <button class="delete">Delete</button>
+                    <button class="buttons" id="clear">Clear</button>
+                    <button class="buttons" id="delete">Delete</button>
                 </div>
                 <!-- Eingabe-Buttons -->
                 <div class="inputButtons">
-                    <button class="seven">7</button>
-                    <button class="eight">8</button>
-                    <button class="nine">9</button>
-                    <button class="divide">/</button>
-                    <button class="four">4</button>
-                    <button class="five">5</button>
-                    <button class="six">6</button>
-                    <button class="multiply">x</button>
-                    <button class="one">1</button>
-                    <button class="two">2</button>
-                    <button class="three">3</button>
-                    <button class="minus">-</button>
-                    <button class="comma">,</button>
-                    <button class="zero">0</button>
-                    <button class="equal">=</button>
-                    <button class="plus">+</button>
+                    <button class="buttons numberButtons" id="seven" value="7">7</button>
+                    <button class="buttons numberButtons" id="eight" value="8">8</button>
+                    <button class="buttons numberButtons" id="nine" value="9">9</button>
+                    <button class="buttons operatorButtons" id="divide" value="/">/</button>
+                    <button class="buttons numberButtons" id="four" value="4">4</button>
+                    <button class="buttons numberButtons" id="five" value="5">5</button>
+                    <button class="buttons numberButtons" id="six" value="6">6</button>
+                    <button class="buttons operatorButtons" id="multiply" value="*">x</button>
+                    <button class="buttons numberButtons" id="one" value="1">1</button>
+                    <button class="buttons numberButtons" id="two" value="2">2</button>
+                    <button class="buttons numberButtons" id="three" value="3">3</button>
+                    <button class="buttons operatorButtons" id="minus" value="-">-</button>
+                    <button class="buttons operatorButtons" id="comma" value=".">,</button>
+                    <button class="buttons numberButtons" id="zero" value="0">0</button>
+                    <button class="buttons operatorButtons" id="equal" value="=">=</button>
+                    <button class="buttons operatorButtons" id="plus" value="+">+</button>
                 </div>
             </div>
         </div>
@@ -49,5 +49,7 @@
     <footer>
         <p>Copyright © 2025 Behlül Samil Selcuk</p>
     </footer>
+
+    <script src="./script.js"></script>
 </body>
 </html>

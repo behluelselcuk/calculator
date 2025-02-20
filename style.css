@@ -36,7 +36,7 @@ header {
 }
 
 /* === Display === */
-.display {
+#display {
     width: 90%;
     height: 20%;
     background-color: rgb(247, 247, 247);
@@ -52,7 +52,7 @@ header {
 }
 
 /* === Buttons === */
-.buttons {
+.buttonsHeader {
     width: 90%;
     height: 65%;
 
@@ -62,7 +62,7 @@ header {
     justify-content: space-between;
 }
 
-.buttons button {
+.buttonsHeader button {
     border: 2px solid black;
     border-radius: 10px;
     font-size: 1.7rem;
@@ -85,19 +85,19 @@ header {
     height: 100%;
 }
 
-.eraseButtons .clear {
+.eraseButtons #clear {
     background-color: rgb(210, 106, 106);
 }
 
-.eraseButtons .clear:hover {
+.eraseButtons #clear:hover {
     background-color: rgb(206, 62, 62);
 }
 
-.eraseButtons .delete {
+.eraseButtons #delete {
     background-color: rgb(99, 99, 206);
 }
 
-.eraseButtons .delete:hover {
+.eraseButtons #delete:hover {
     background-color: rgb(52, 52, 201);
 }
 
