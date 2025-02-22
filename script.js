@@ -4,6 +4,11 @@
     // Ein Taschenrechner, der alle grundlegenden mathematischen Operatoren enthält, die man so typischerweise kennt
 
 // Eingabe
+    // Variablen
+    let num1 = ''
+    let operator = ''
+    let num2 = ''
+
     // das Display
     let display = document.querySelector('#display')
 
@@ -37,6 +42,7 @@
     let commaBtn = document.querySelector('#comma')
 
 
+
 // Verarbeitung
     // beim Betätigen einer number-Button, soll die Anzeige auf dem Display sich dementsprechend ändern
     // beim Betätigen der erase-Buttons, soll das Display dementsprechend (delete / clear) gereinigt werden
@@ -46,24 +52,30 @@
 function showNumberButtonValue(event) {
     const value = event.target.value;
 
-    if (display.textContent === '0') {
-        display.textContent = value;
+    if (operator === '') {
+        if (value === '.' && num1.includes('.')) return;
+        num1 += value;
+        display.textContent = num1;
     }
     else {
-        display.textContent += value;
+        if (value === '.' && num2.includes('.')) return;
+        num2 += value;
+        display.textContent = num2;
     }
 }
 
 function showOperatorButtonValue(event) {
-    const value = event.target.value;
-
-    if (display.textContent !== '0') {
-        display.textContent += ` ${value} `;
+    if (num1 !== '' && operator === '') {
+        operator = event.target.value;
+        display.textContent = ` ${num1} ${operator} `;
     }
 }
 
 function clearDisplay() {
     display.textContent = 0;
+    num1 = '';
+    operator = '';
+    num2 = '';
 }
 
 function deleteDisplay() {
@@ -73,18 +85,19 @@ function deleteDisplay() {
                 // falls Operator (außer Komma) => lösche drei Zeichen
                 // falls Zahl (einschließlich Komma) => lösche ein Zeichen
         // falls nein => bleibt gleich
-    let content = display.textContent;
-
-    if (content.length <= 1) {
-        display.textContent = '0';
+    if (operator === '') {
+        num1 = num1.slice(0, -1);
+        display.textContent = num1 === '' ? '0' : num1;
     }
-    else if (content.length > 1) {
-        if (content.endsWith(' ')) {
-            display.textContent = display.textContent.slice(0, -3);
-        }
-        else {
-            display.textContent = display.textContent.slice(0, -1);
-        }
+    else if (num2 === '') {
+        operator = '';
+        display.textContent = num1;
+    }
+    else {
+        num2 = num2.slice(0, -1);
+        display.textContent = num2 === ''
+            ? `${num1} ${operator}`
+            : `${num1} ${operator} ${num2}`;
     }
 }
 
@@ -104,7 +117,28 @@ function divide(x, y) {
     return x / y;
 }
 
+function operate(operator, num1, num2) {
+    switch (operator) {
+        case '+':
+            return add(num1, num2);
+        case '-':
+            return minus(num1, num2);
+        case '/':
+            return divide(num1,num2);
+        case '*':
+            return multiply(num1, num2);
+        default:
+            return 'Fehler';
+    }
+}
 
+function calculateResult() {
+    let result = operate(operator, parseFloat(num1), parseFloat(num2))
+    display.textContent = result;
+    num1 = result.toString();
+    operator = '';
+    num2 = '';
+}
 
 numberBtns.forEach(btn => {
     btn.addEventListener('click', showNumberButtonValue)
@@ -117,6 +151,8 @@ operatorBtns.forEach(btn => {
 clearBtn.addEventListener('click', clearDisplay)
 
 deleteBtn.addEventListener('click', deleteDisplay)
+
+euqalBtn.addEventListener('click', calculateResult)
 
 
 
