@@ -38,7 +38,7 @@
     let multiplyBtn = document.querySelector('#multiply')
     let minusBtn = document.querySelector('#minus')
     let plusBtn = document.querySelector('#plus')
-    let euqalBtn = document.querySelector('#equal')
+    let equalBtn = document.querySelector('#equal')
     let commaBtn = document.querySelector('#comma')
 
 
@@ -51,24 +51,48 @@
 
 function showNumberButtonValue(event) {
     const value = event.target.value;
-
+    
     if (operator === '') {
+        if (value === '.' && num1 === '') return;
         if (value === '.' && num1.includes('.')) return;
+        if (value === '0' && num1 === '0') return;
         num1 += value;
         display.textContent = num1;
-    }
-    else {
+    } else {
+        if (value === '.' && num2 === '') return;
         if (value === '.' && num2.includes('.')) return;
+        if (value === '0' && num2 === '0') return;
         num2 += value;
-        display.textContent = num2;
+        if (num2.charAt(0) === '.') {
+            display.textContent = `${num1} ${operator}${num2}`;
+        } else {
+            display.textContent = `${num1} ${operator} ${num2}`;
+        }
     }
+
+    updateEqualButton()
 }
 
 function showOperatorButtonValue(event) {
-    if (num1 !== '' && operator === '') {
-        operator = event.target.value;
-        display.textContent = ` ${num1} ${operator} `;
+    if (num1 !== '') {
+        if (num2 === '') {
+            operator = event.target.value;
+            display.textContent = `${num1} ${operator}`;
+        }
     }
+    updateEqualButton();
+    
+    // if (num1 !== '' && operator === '') {
+    //     operator = event.target.value;
+    //     if (operator === '.') {
+    //         display.textContent = `${num1}${operator}`;
+    //     }
+    //     else {
+    //         display.textContent = ` ${num1} ${operator} `;
+    //     }
+    // }
+
+    // updateEqualButton()
 }
 
 function clearDisplay() {
@@ -76,6 +100,8 @@ function clearDisplay() {
     num1 = '';
     operator = '';
     num2 = '';
+
+    updateEqualButton()
 }
 
 function deleteDisplay() {
@@ -99,6 +125,8 @@ function deleteDisplay() {
             ? `${num1} ${operator}`
             : `${num1} ${operator} ${num2}`;
     }
+
+    updateEqualButton()
 }
 
 function add(x, y) {
@@ -114,6 +142,9 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
+    if (y === 0) {
+        return 'Fehler';
+    }
     return x / y;
 }
 
@@ -133,11 +164,20 @@ function operate(operator, num1, num2) {
 }
 
 function calculateResult() {
+    if (num1 === '' || num2 === '') {
+        return;
+    }
     let result = operate(operator, parseFloat(num1), parseFloat(num2))
     display.textContent = result;
     num1 = result.toString();
     operator = '';
     num2 = '';
+
+    updateEqualButton()
+}
+
+function updateEqualButton() {
+    equalBtn.disabled = (operator === '' || num2 === '')
 }
 
 numberBtns.forEach(btn => {
@@ -145,14 +185,18 @@ numberBtns.forEach(btn => {
 })
 
 operatorBtns.forEach(btn => {
-    btn.addEventListener('click', showOperatorButtonValue)
+    if (btn.id !== 'comma') {
+        btn.addEventListener('click', showOperatorButtonValue)
+    }
 })
+
+commaBtn.addEventListener('click', showNumberButtonValue)
 
 clearBtn.addEventListener('click', clearDisplay)
 
 deleteBtn.addEventListener('click', deleteDisplay)
 
-euqalBtn.addEventListener('click', calculateResult)
+equalBtn.addEventListener('click', calculateResult)
 
 
 
