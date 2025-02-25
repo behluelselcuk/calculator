@@ -53,21 +53,55 @@ function showNumberButtonValue(event) {
     const value = event.target.value;
     
     if (operator === '') {
-        if (value === '.' && num1 === '') return;
+        if (value === '.' && num1 === '') {
+            num1 = '0.';
+            display.textContent = num1;
+            updateEqualButton();
+            return;
+        }
         if (value === '.' && num1.includes('.')) return;
-        if (value === '0' && num1 === '0') return;
-        num1 += value;
+        if (num1 === '0') {
+            if (value === '0') {
+                return;
+            }
+            else {
+                num1 += value;
+            }
+        }
+        else {
+            if (num1 === '' && value === '0') {
+                num1 = '0';
+            }
+            else {
+                num1 += value;
+            }
+        }
         display.textContent = num1;
     } else {
-        if (value === '.' && num2 === '') return;
-        if (value === '.' && num2.includes('.')) return;
-        if (value === '0' && num2 === '0') return;
-        num2 += value;
-        if (num2.charAt(0) === '.') {
-            display.textContent = `${num1} ${operator}${num2}`;
-        } else {
+        if (value === '.' && num2 === '') {
+            num2 = '0.';
             display.textContent = `${num1} ${operator} ${num2}`;
+            updateEqualButton();
+            return;
         }
+        if (value === '.' && num2.includes('.')) return;
+        if (num2 === '0') {
+            if (value === '0') {
+                return;
+            }
+            else {
+                num2 += value;
+            }
+        }
+        else {
+            if (num2 === '' && value === '0') {
+                num2 = '0';
+            }
+            else {
+                num2 += value;
+            }
+        }
+        display.textContent = `${num1} ${operator} ${num2}`;
     }
 
     updateEqualButton()
@@ -81,18 +115,6 @@ function showOperatorButtonValue(event) {
         }
     }
     updateEqualButton();
-    
-    // if (num1 !== '' && operator === '') {
-    //     operator = event.target.value;
-    //     if (operator === '.') {
-    //         display.textContent = `${num1}${operator}`;
-    //     }
-    //     else {
-    //         display.textContent = ` ${num1} ${operator} `;
-    //     }
-    // }
-
-    // updateEqualButton()
 }
 
 function clearDisplay() {
